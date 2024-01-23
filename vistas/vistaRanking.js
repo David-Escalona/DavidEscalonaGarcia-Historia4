@@ -1,4 +1,5 @@
 import { juego } from "./juego.js"
+import { buscador } from "../funciones/funciones.js"
 
 export const vistaRanking = {
     template: 
@@ -91,9 +92,9 @@ export const vistaRanking = {
 						<button
 							class="btn btn-outline-secondary"
 							type="button"
-							id="button-addon2"
+							id="boton"
 						>
-							<i class="bi bi-x-lg"></i>
+							<i>👍</i>
 						</button>
 					</div>
 					<table class="table table-dark">
@@ -108,19 +109,19 @@ export const vistaRanking = {
 						<tbody>
 							<tr>
 								<td><img src="" alt="avatar" /></td>
-								<td>ANDER</td>
+								<td>Messi</td>
 								<td>10</td>
 								<td>13 ABRIL 2023</td>
 							</tr>
 							<tr>
 								<td><img src="" alt="avatar" /></td>
-								<td>ANDER</td>
+								<td>Cristiano</td>
 								<td>600</td>
 								<td>13 FEBRERO 2023</td>
 							</tr>
 							<tr>
 								<td><img src="" alt="avatar" /></td>
-								<td>ANDER</td>
+								<td>Neymar</td>
 								<td>888</td>
 								<td>1 ENERO 2023</td>
 							</tr>
@@ -135,9 +136,17 @@ export const vistaRanking = {
     `,
 
     script: () => {
-        document.querySelector('#partida').addEventListener('click', () =>{
-        document.querySelector('main').innerHTML = juego.template
-		juego.script()
-        }
-    )}
-}
+		document.querySelector('#boton').addEventListener('click', () => {
+		  const textoBusqueda = document.querySelector('#buscador input').value;
+		  const partidasCoincidentes = buscador(textoBusqueda);
+		  
+		  // Aquí puedes hacer algo con el array de partidasCoincidentes, como actualizar la tabla en la vista, etc.
+		  console.log(partidasCoincidentes);
+		});
+	
+		document.querySelector('#partida').addEventListener('click', () => {
+		  document.querySelector('main').innerHTML = juego.template;
+		  juego.script();
+		});
+	  }
+	};
