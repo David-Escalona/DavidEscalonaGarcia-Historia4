@@ -136,17 +136,16 @@ export const vistaRanking = {
     `,
 
     script: () => {
-		document.querySelector('#boton').addEventListener('click', () => {
-		  const textoBusqueda = document.querySelector('#buscador input').value;
-		  const partidasCoincidentes = buscador(textoBusqueda);
+			document.querySelector('#boton').addEventListener('click', () => { //Selecciono el id de boton y le añado un evento click
+		  	const textoBusqueda = document.querySelector('#buscador input').value;
+		  	const partidasCoincidentes = buscador(textoBusqueda);
 		  
-		  // Aquí puedes hacer algo con el array de partidasCoincidentes, como actualizar la tabla en la vista, etc.
-		  console.log(partidasCoincidentes);
+		  	console.log(partidasCoincidentes); //Saco por consola las partidas
 		});
 	
-		document.querySelector('#partida').addEventListener('click', () => {
-		  document.querySelector('main').innerHTML = juego.template;
-		  juego.script();
+			document.querySelector('#partida').addEventListener('click', () => {
+		  	document.querySelector('main').innerHTML = juego.template;
+		  	juego.script();
 		});
 	  }
 	};
