@@ -56,24 +56,6 @@ export const vistaRanking = {
 							</tr>
 						</theader>
 						<tbody>
-							<tr>
-								<td class="fs-2">1</td>
-								<td><img src="" alt="avatar" /></td>
-								<td>ANDER</td>
-								<td>1255</td>
-							</tr>
-							<tr>
-								<td class="fs-2">2</td>
-								<td><img src="" alt="avatar" /></td>
-								<td>ANDER</td>
-								<td>1255</td>
-							</tr>
-							<tr>
-								<td class="fs-2">3</td>
-								<td><img src="" alt="avatar" /></td>
-								<td>ANDER</td>
-								<td>1255</td>
-							</tr>
 						</tbody>
 						<tfoot></tfoot>
 					</table>
@@ -143,17 +125,40 @@ export const vistaRanking = {
     `,
 
     script: () => {
-			document.querySelector('#boton').addEventListener('click', () => { //Selecciono el id de boton y le añado un evento click
-		  	const textoBusqueda = document.querySelector('#buscador input').value; //Creo una variable llamada textoBusqueda y la seleciono mediante su id en el documento
-			//Dentro del documento se el id de buscador hara referencia a textoBusqueda y el input es necesario para meterte dentro del id de buscador 
-		  	const partidasCoincidentes = buscador(textoBusqueda); // Creo una variable partidasCoincidentes que llama a la funcion buscador con el texto de textoBusqueda
-		  
-		  	console.log(partidasCoincidentes); //Saco por consola las partidas
+		document.querySelector("#boton").addEventListener("click", () => {
+		  const textoBusqueda = document.querySelector("#buscador input").value;
+		  const partidasCoincidentes = buscador(textoBusqueda);
+	
+		  // Limpiar el contenido actual del ranking
+		  limpiarRanking();
+	
+		  // Actualizar el contenido del ranking con las partidas coincidentes
+		  actualizarRanking(partidasCoincidentes);
 		});
 	
-			document.querySelector('#partida').addEventListener('click', () => { //Selecciono el id partidas del documento y le añado un evento click
-		  	document.querySelector('main').innerHTML = juego.template; //Seleciono dentro del documento el main y le inyecto el apartado de juego al html
-		  	juego.script(); //Se llama a la funcion
+		document.querySelector("#partida").addEventListener("click", () => {
+		  document.querySelector("main").innerHTML = juego.template;
+		  juego.script();
 		});
-	  }
+	  },
 	};
+	
+	function limpiarRanking() {
+	  const rankingTableBody = document.querySelector("#partidas tbody");
+	  rankingTableBody.innerHTML = ""; // Limpiar el contenido actual del cuerpo de la tabla
+	}
+	
+	function actualizarRanking(partidas) {
+	  const rankingTableBody = document.querySelector("#partidas tbody");
+	
+	  partidas.forEach((partida, index) => {
+		const row = document.createElement("tr");
+		row.innerHTML = `
+		  <td class="fs-2">${index + 1}</td>
+		  <td><img src="img/${partida.nick.toLowerCase()}.jpg" alt="avatar" height="50"/></td>
+		  <td>${partida.nick}</td>
+		  <td>${partida.puntuacion}</td>
+		`;
+		rankingTableBody.appendChild(row);
+	  });
+	}
