@@ -78,10 +78,18 @@ export const vistaRanking = {
 						<tfoot></tfoot>
 					</table>
 				</div>
-
+				
 				<div id="partidas" class="m-5 p-5 bg-dark">
 					<h2 class="text-center text-light">Partidas</h2>
+					
 					<div id="buscador" class="input-group mb-3">
+					<button
+							class="btn btn-outline-secondary"
+							type="button"
+							id="boton"
+						>
+							<i>Buscador</i>
+						</button>
 						<input
 							type="text"
 							class="form-control"
@@ -92,9 +100,8 @@ export const vistaRanking = {
 						<button
 							class="btn btn-outline-secondary"
 							type="button"
-							id="boton"
 						>
-							<i>👍</i>
+							<i>X</i>
 						</button>
 					</div>
 					<table class="table table-dark">
@@ -108,19 +115,19 @@ export const vistaRanking = {
 						</theader>
 						<tbody>
 							<tr>
-								<td><img src="" alt="avatar" /></td>
+								<td><img src="img/messi.jpg" alt="Messi" height="50"></td>
 								<td>Messi</td>
 								<td>10</td>
 								<td>13 ABRIL 2023</td>
 							</tr>
 							<tr>
-								<td><img src="" alt="avatar" /></td>
+								<td><img src="img/cristiano.jpg" alt="Cristiano" height="50"></td>
 								<td>Cristiano</td>
 								<td>600</td>
 								<td>13 FEBRERO 2023</td>
 							</tr>
 							<tr>
-								<td><img src="" alt="avatar" /></td>
+								<td><img src="img/neymar.jpg" alt="Neymar" height="50"></td>
 								<td>Neymar</td>
 								<td>888</td>
 								<td>1 ENERO 2023</td>
@@ -137,15 +144,16 @@ export const vistaRanking = {
 
     script: () => {
 			document.querySelector('#boton').addEventListener('click', () => { //Selecciono el id de boton y le añado un evento click
-		  	const textoBusqueda = document.querySelector('#buscador input').value;
-		  	const partidasCoincidentes = buscador(textoBusqueda);
+		  	const textoBusqueda = document.querySelector('#buscador input').value; //Creo una variable llamada textoBusqueda y la seleciono mediante su id en el documento
+			//Dentro del documento se el id de buscador hara referencia a textoBusqueda y el input es necesario para meterte dentro del id de buscador 
+		  	const partidasCoincidentes = buscador(textoBusqueda); // Creo una variable partidasCoincidentes que llama a la funcion buscador con el texto de textoBusqueda
 		  
 		  	console.log(partidasCoincidentes); //Saco por consola las partidas
 		});
 	
-			document.querySelector('#partida').addEventListener('click', () => {
-		  	document.querySelector('main').innerHTML = juego.template;
-		  	juego.script();
+			document.querySelector('#partida').addEventListener('click', () => { //Selecciono el id partidas del documento y le añado un evento click
+		  	document.querySelector('main').innerHTML = juego.template; //Seleciono dentro del documento el main y le inyecto el apartado de juego al html
+		  	juego.script(); //Se llama a la funcion
 		});
 	  }
 	};
