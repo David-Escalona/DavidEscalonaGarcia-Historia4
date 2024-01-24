@@ -125,40 +125,47 @@ export const vistaRanking = {
     `,
 
     script: () => {
-		document.querySelector("#boton").addEventListener("click", () => {
-		  const textoBusqueda = document.querySelector("#buscador input").value;
-		  const partidasCoincidentes = buscador(textoBusqueda);
-	
-		  // Limpiar el contenido actual del ranking
-		  limpiarRanking();
-	
-		  // Actualizar el contenido del ranking con las partidas coincidentes
-		  actualizarRanking(partidasCoincidentes);
+			document.querySelector("#boton").addEventListener("click", () => { // Dentro del documento selecciono el id boton y le añado un evento click
+		  	const textoBusqueda = document.querySelector("#buscador input").value; // Creo una variable llamada textoBusqueda y la selecciono del documento mediante el id buscador metiendome en el input y saco su valor
+		  	const partidasCoincidentes = buscador(textoBusqueda); // Creo la variable partidasCoincidentes y dentro de la funcion buscador llamo al textoBusqueda
+				
+			limpiarRanking(); // Limpiar el contenido actual del ranking
+
+		  	actualizarRanking(partidasCoincidentes); // Actualizar el contenido del ranking con las partidas coincidentes
 		});
 	
-		document.querySelector("#partida").addEventListener("click", () => {
-		  document.querySelector("main").innerHTML = juego.template;
-		  juego.script();
+			document.querySelector("#partida").addEventListener("click", () => {// Dentro del documento selecciono el id partidas y le añado un evento click
+		  	document.querySelector("main").innerHTML = juego.template; // Selecciono la etiqueta main e inyecto en el html el codigo de juego.template
+		  	juego.script(); // Llamo a la funcion juego
 		});
 	  },
 	};
 	
-	function limpiarRanking() {
-	  const rankingTableBody = document.querySelector("#partidas tbody");
-	  rankingTableBody.innerHTML = ""; // Limpiar el contenido actual del cuerpo de la tabla
+	function limpiarRanking(){ // Exporto una funcion llamada limpiaRanking
+
+		const ranking = document.querySelector("#partidas tbody"); // Creo una variable llamada ranking y la selecciono del documento mediante el id partidas dentro del tbody
+		ranking.innerHTML = ""; // Limpio el contenido actual de la tabla
+	
 	}
 	
-	function actualizarRanking(partidas) {
-	  const rankingTableBody = document.querySelector("#partidas tbody");
+	function actualizarRanking(partidas){ // Exporto una funcion que acabo de creo llamada actualizarRanking que recibe el valor partidas
 	
-	  partidas.forEach((partida, index) => {
-		const row = document.createElement("tr");
-		row.innerHTML = `
-		  <td class="fs-2">${index + 1}</td>
-		  <td><img src="img/${partida.nick.toLowerCase()}.jpg" alt="avatar" height="50"/></td>
-		  <td>${partida.nick}</td>
-		  <td>${partida.puntuacion}</td>
+		const ranking = document.querySelector("#partidas tbody"); // Creo una variable ranking y la selecciono del documento mediante su id partidas dentro del tbody
+	
+		partidas.forEach((partidas, sumar) => { // Con esta linea voy agregando mediante un forEach las partidas
+		const fila = document.createElement("tr"); // Creo una variable llamada filas y hago que en el documento me agregue un tr
+		fila.innerHTML = ` 
+		  <td class="fs-2">${sumar + 1}</td>
+		  <td><img src="img/${partidas.nick.toLowerCase()}.jpg" alt="avatar" height="50"/></td>
+		  <td>${partidas.nick}</td>
+		  <td>${partidas.puntuacion}</td>
 		`;
-		rankingTableBody.appendChild(row);
+		// En la primera linea voy añadiendo al html la variable fila
+		// La segunda linea me aplica el jugador que coincide y el +1 es porque enpieza en 0
+		// La tercera linea nos inyecta al html el codigo del jugador que coincide con su imagen y nick
+		// La cuarta linea nos agrega su nick
+		// La quita linea nos agrega su puntuacion
+	
+		ranking.appendChild(fila); // Por ultimo esta linea en el ranking nos agrega las filas creadas en caso de jugador coincidente gracias al appendChild
 	  });
 	}
