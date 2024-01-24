@@ -44,7 +44,7 @@ export const vistaRanking = {
 	</head>
 	<body class="text-light">
     <div id="info" class="">
-				<div id="partidas" class="m-5 p-5 bg-dark">
+				<div class="m-5 p-5 bg-dark">
 					<h2 class="text-center text-light">Ranking</h2>
 					<table class="table table-dark align-middle">
 						<theader>
@@ -56,6 +56,24 @@ export const vistaRanking = {
 							</tr>
 						</theader>
 						<tbody>
+							<tr>
+							<td><img src="img/messi.jpg" alt="Messi" height="50"></td>
+							<td>Messi</td>
+							<td>10</td>
+							<td>13 ABRIL 2023</td>
+						</tr>
+						<tr>
+							<td><img src="img/cristiano.jpg" alt="Cristiano" height="50"></td>
+							<td>Cristiano</td>
+							<td>600</td>
+							<td>13 FEBRERO 2023</td>
+						</tr>
+						<tr>
+							<td><img src="img/neymar.jpg" alt="Neymar" height="50"></td>
+							<td>Neymar</td>
+							<td>888</td>
+							<td>1 ENERO 2023</td>
+						</tr>
 						</tbody>
 						<tfoot></tfoot>
 					</table>
@@ -82,6 +100,7 @@ export const vistaRanking = {
 						<button
 							class="btn btn-outline-secondary"
 							type="button"
+							id="borrar"
 						>
 							<i>X</i>
 						</button>
@@ -96,24 +115,7 @@ export const vistaRanking = {
 							</tr>
 						</theader>
 						<tbody>
-							<tr>
-								<td><img src="img/messi.jpg" alt="Messi" height="50"></td>
-								<td>Messi</td>
-								<td>10</td>
-								<td>13 ABRIL 2023</td>
-							</tr>
-							<tr>
-								<td><img src="img/cristiano.jpg" alt="Cristiano" height="50"></td>
-								<td>Cristiano</td>
-								<td>600</td>
-								<td>13 FEBRERO 2023</td>
-							</tr>
-							<tr>
-								<td><img src="img/neymar.jpg" alt="Neymar" height="50"></td>
-								<td>Neymar</td>
-								<td>888</td>
-								<td>1 ENERO 2023</td>
-							</tr>
+							
 						</tbody>
 						<tfoot></tfoot>
 					</table>
@@ -147,14 +149,14 @@ export const vistaRanking = {
 		ranking.innerHTML = ""; // Limpio el contenido actual de la tabla
 	
 	}
-	
+
 	function actualizarRanking(partidas){ // Exporto una funcion que acabo de creo llamada actualizarRanking que recibe el valor partidas
 	
 		const ranking = document.querySelector("#partidas tbody"); // Creo una variable ranking y la selecciono del documento mediante su id partidas dentro del tbody
-	
+		
 		partidas.forEach((partidas, sumar) => { // Con esta linea voy agregando mediante un forEach las partidas
 		const fila = document.createElement("tr"); // Creo una variable llamada filas y hago que en el documento me agregue un tr
-		fila.innerHTML = ` 
+		fila.innerHTML = `
 		  <td class="fs-2">${sumar + 1}</td>
 		  <td><img src="img/${partidas.nick.toLowerCase()}.jpg" alt="avatar" height="50"/></td>
 		  <td>${partidas.nick}</td>
