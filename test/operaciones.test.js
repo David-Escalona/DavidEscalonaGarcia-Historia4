@@ -1,5 +1,6 @@
 import { dias, modificaData, modificaData2, modificaNick } from '../src/operaciones.js';
 import { expect } from 'chai'
+import { buscador } from '../funciones/funciones.js';
 
 describe('modificaNick', () => {
     it('debería retornar null y mostrar un alert si la cadena está vacía', () => {
@@ -59,4 +60,72 @@ describe('dias', () => {
       });
     });
 });
-  
+
+describe('orden', () => {
+  it('debería ordenar el campo "nick" de forma ascendente correctamente', () => {
+    const partidas = [
+      { nick: 'Messi', puntuacion: 10, fecha: '13 ABRIL 2023' },
+      { nick: 'Cristiano', puntuacion: 600, fecha: '13 FEBRERO 2023' },
+      { nick: 'Rubiales', puntuacion: 888, fecha: '1 ENERO 2023' }
+    ];
+
+    orden('nick', 'up', partidas);
+
+    // Esperamos que la función ordene el array ascendente según el campo "nick"
+    expect(partidas).toEqual([
+      { nick: 'Cristiano', puntuacion: 600, fecha: '13 FEBRERO 2023' },
+      { nick: 'Messi', puntuacion: 10, fecha: '13 ABRIL 2023' },
+      { nick: 'Rubiales', puntuacion: 888, fecha: '1 ENERO 2023' }
+    ]);
+  });
+
+  it('debería ordenar el campo "puntuacion" de forma descendente correctamente', () => {
+    const partidas = [
+      { nick: 'Messi', puntuacion: 10, fecha: '13 ABRIL 2023' },
+      { nick: 'Cristiano', puntuacion: 600, fecha: '13 FEBRERO 2023' },
+      { nick: 'Rubiales', puntuacion: 888, fecha: '1 ENERO 2023' }
+    ];
+
+    orden('puntuacion', 'down', partidas);
+
+    // Esperamos que la función ordene el array descendente según el campo "puntuacion"
+    expect(partidas).toEqual([
+      { nick: 'Rubiales', puntuacion: 888, fecha: '1 ENERO 2023' },
+      { nick: 'Cristiano', puntuacion: 600, fecha: '13 FEBRERO 2023' },
+      { nick: 'Messi', puntuacion: 10, fecha: '13 ABRIL 2023' }
+    ]);
+  });
+});
+
+// Describe la suite de pruebas para la función buscador
+describe('buscador', () => {
+  it('debería devolver partidas coincidentes correctamente', () => {
+    const texto = 'Messi';
+
+    const partidas = [
+      { nick: 'Messi', puntuacion: 10, fecha: '13 ABRIL 2023' },
+      { nick: 'Cristiano', puntuacion: 600, fecha: '13 FEBRERO 2023' },
+      { nick: 'Rubiales', puntuacion: 888, fecha: '1 ENERO 2023' }
+    ];
+
+    const resultado = buscador(texto, partidas);
+
+    // Esperamos que la función devuelva las partidas coincidentes
+    expect(resultado).toEqual([{ nick: 'Messi', puntuacion: 10, fecha: '13 ABRIL 2023' }]);
+  });
+
+  it('debería devolver un array vacío si no hay coincidencias', () => {
+    const texto = 'Iniesta';
+
+    const partidas = [
+      { nick: 'Messi', puntuacion: 10, fecha: '13 ABRIL 2023' },
+      { nick: 'Cristiano', puntuacion: 600, fecha: '13 FEBRERO 2023' },
+      { nick: 'Rubiales', puntuacion: 888, fecha: '1 ENERO 2023' }
+    ];
+
+    const resultado = buscador(texto, partidas);
+
+    // Esperamos que la función devuelva un array vacío
+    expect(resultado).toEqual([]);
+  });
+});

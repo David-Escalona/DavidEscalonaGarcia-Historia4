@@ -97,3 +97,4 @@ export function dias (date) {
 
   return dias // Devuelve el valor dias
 }
+
