@@ -57,20 +57,20 @@ export const vistaRanking = {
 						</theader>
 						<tbody>
 							<tr>
-							<td><img src="img/messi.jpg" alt="Messi" height="50"></td>
+							<td><img src="img/messi.jpg" alt="Messi" height="100" width="120"></td>
 							<td>Messi</td>
 							<td>10</td>
 							<td>13 ABRIL 2023</td>
 						</tr>
 						<tr>
-							<td><img src="img/cristiano.jpg" alt="Cristiano" height="50"></td>
+							<td><img src="img/cristiano.jpg" alt="Cristiano" height="100" width="120"></td>
 							<td>Cristiano</td>
 							<td>600</td>
 							<td>13 FEBRERO 2023</td>
 						</tr>
 						<tr>
-							<td><img src="img/neymar.jpg" alt="Neymar" height="50"></td>
-							<td>Neymar</td>
+							<td><img src="img/rubiales.jpg" alt="Neymar" height="100" width="120"></td>
+							<td>Rubiales</td>
 							<td>888</td>
 							<td>1 ENERO 2023</td>
 						</tr>
@@ -105,15 +105,16 @@ export const vistaRanking = {
 							<i>X</i>
 						</button>
 					</div>
+					<div class="d-flex justify-content-center">
+						<p></p>
+						<p id="iconNick" style="margin: 0 50px; color: white;">Nick <i class="bi bi-arrow-up-square"></i></p>
+						<p id="iconPuntuacion" style="margin: 0 50px; color: white;">Puntuación <i class="bi bi-arrow-up-square"></i></p>
+						<p id="iconFecha" style="margin: 0 50px; color: white;">Fecha <i class="bi bi-arrow-up-square"></i></p>
+					</div>
+
+								
 					<table class="table table-dark">
-						<theader>
-							<tr>
-								<td></td>
-								<td>Nick <i class="bi bi-arrow-up-square"></i></td>
-								<td>Puntuación <i class="bi bi-arrow-up-square"></i></td>
-								<td>Fecha <i class="bi bi-arrow-up-square"></i></td>
-							</tr>
-						</theader>
+						
 						<tbody>
 							
 						</tbody>
@@ -127,6 +128,7 @@ export const vistaRanking = {
     `,
 
     script: () => {
+
 			document.querySelector("#boton").addEventListener("click", () => { // Dentro del documento selecciono el id boton y le añado un evento click
 		  	const textoBusqueda = document.querySelector("#buscador input").value; // Creo una variable llamada textoBusqueda y la selecciono del documento mediante el id buscador metiendome en el input y saco su valor
 		  	const partidasCoincidentes = buscador(textoBusqueda); // Creo la variable partidasCoincidentes y dentro de la funcion buscador llamo al textoBusqueda
@@ -158,9 +160,10 @@ export const vistaRanking = {
 		const fila = document.createElement("tr"); // Creo una variable llamada filas y hago que en el documento me agregue un tr
 		fila.innerHTML = `
 		  <td class="fs-2">${sumar + 1}</td>
-		  <td><img src="img/${partidas.nick.toLowerCase()}.jpg" alt="avatar" height="50"/></td>
+		  <td><img src="img/${partidas.nick.toLowerCase()}.jpg" alt="avatar" height="100" width="120"/></td>
 		  <td>${partidas.nick}</td>
 		  <td>${partidas.puntuacion}</td>
+		  <td>${partidas.fecha}</td>
 		`;
 		// En la primera linea voy añadiendo al html la variable fila
 		// La segunda linea me aplica el jugador que coincide y el +1 es porque enpieza en 0

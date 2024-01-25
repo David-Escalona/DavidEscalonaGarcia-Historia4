@@ -3,7 +3,7 @@ export function buscador(texto){ // Exporto una funcion llamada buscador con el 
     const partidas = [ // Creo un array de partidas con los datos de las personas que participasn
       {nick: "Messi", puntuacion: 10, fecha: "13 ABRIL 2023" },
       {nick: "Cristiano", puntuacion: 600, fecha: "13 FEBRERO 2023" },
-      {nick: "Neymar", puntuacion: 888, fecha: "1 ENERO 2023" }
+      {nick: "Rubiales", puntuacion: 888, fecha: "1 ENERO 2023" }
     ];
   
     const coincidencias = partidas.filter(partida => partida.nick.toLowerCase().includes(texto.toLowerCase())) 
