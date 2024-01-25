@@ -14,9 +14,3 @@ export function buscador(texto){ // Exporto una funcion llamada buscador con el 
 
     return coincidencias; // Devulevo las coincidencias
 }
-
-export function orden(campo, tipo){
-
-  
-
-}

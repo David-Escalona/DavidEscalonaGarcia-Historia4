@@ -109,7 +109,7 @@ export const vistaRanking = {
 						<p></p>
 						<p id="iconNick" style="margin: 0 50px; color: white;">Nick <i class="bi bi-arrow-up-square"></i></p>
 						<p id="iconPuntuacion" style="margin: 0 50px; color: white;">Puntuación <i class="bi bi-arrow-up-square"></i></p>
-						<p id="iconFecha" style="margin: 0 50px; color: white;">Fecha <i class="bi bi-arrow-up-square"></i></p>
+						<p style="margin: 0 50px; color: white;">Fecha <i class="bi bi-arrow-up-square"></i></p>
 					</div>
 
 								
@@ -138,13 +138,43 @@ export const vistaRanking = {
 		  	actualizarRanking(partidasCoincidentes); // Actualizar el contenido del ranking con las partidas coincidentes
 		});
 	
-			document.querySelector("#partida").addEventListener("click", () => {// Dentro del documento selecciono el id partidas y le añado un evento click
+			document.querySelector("#partida").addEventListener("click", () => { // Dentro del documento selecciono el id partidas y le añado un evento click
 		  	document.querySelector("main").innerHTML = juego.template; // Selecciono la etiqueta main e inyecto en el html el codigo de juego.template
 		  	juego.script(); // Llamo a la funcion juego
 		});
+
+			document.querySelector("#iconNick").addEventListener("click", () => { // Seleccino el id #iconNick y le añado un evento click
+			orden("nick", "up"); // A la funcion orden que le solicitara al valor nick una orden para que orden los valores ascendentes
+		  });
+	  
+		  	document.querySelector("#iconPuntuacion").addEventListener("click", () => { // Seleccino el id #iconPuntuación y le añado un evento click
+			orden("puntuacion", "up"); // A la funcion orden que le solicitara al valor puntuación una orden para que orden los valores ascendentes
+		  });
 	  },
 	};
 	
+	export function orden(campo, tipo){ // Exporto una funcion llamada orden con dos parametros dentro llamados campo y tipo
+
+ 		const textoBusqueda = document.querySelector("#buscador input").value; // Creo una variable llamada textoBusqueda y la selecciono del documento mediante su id y su etiqueta padre, y luego saco su valor
+  		const partidasCoincidentes = buscador(textoBusqueda); // Creo una variable llamada partidasCoincidentes que llame a la funcion buscador y me saque el valor de textoBusqueda
+
+  	partidasCoincidentes.sort((a, b) => { // Llamo a la variable partidasCoincidentes y le agrego .sort ya que me sirve para ordenar valores que esta vez seran la a y la b 
+
+    	const valorA = a[campo]; // Creo una variable llamada valorA que hara una comparacion mediante el valor a[campo]
+    	const valorB = b[campo]; // Creo una variable llamada valorB que hara una comparacion mediante el valor b[campo]
+
+    	if (tipo === "down"){ // Si el parametro tipo es igual al valor descendiente
+      		return valorA > valorB ? 1 : -1; // Me devolvera el valorA sera mayor que el valor B
+    	} else if (tipo === "up"){ // Si no el parametro tipo es igual al valor ascendiente
+      		return valorA < valorB ? 1 : -1; // Me devolvera el valorA sera memor que el valor B
+    	}
+    		return 0; // Devuelve 0
+  	});
+
+  		limpiarRanking(); // Me eliminar el contenido actual del Ranking
+  		actualizarRanking(partidasCoincidentes); // Me actualiza el ranking mediantes los valores de partidasCoincidentes
+	}
+
 	function limpiarRanking(){ // Exporto una funcion llamada limpiaRanking
 
 		const ranking = document.querySelector("#partidas tbody"); // Creo una variable llamada ranking y la selecciono del documento mediante el id partidas dentro del tbody
